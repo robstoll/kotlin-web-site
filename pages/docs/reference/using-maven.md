@@ -85,6 +85,8 @@ In maven terms that means kotlin-maven-plugin should be run before maven-compile
 
 ``` xml
 <build>
+    <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
     <plugins>
         <plugin>
             <artifactId>kotlin-maven-plugin</artifactId>
@@ -132,11 +134,21 @@ In maven terms that means kotlin-maven-plugin should be run before maven-compile
                     <id>java-compile</id>
                     <phase>compile</phase>
                     <goals> <goal>compile</goal> </goals>
+                    <configuration>
+                        <includes>
+                            <include>${project.basedir}/src/main/java</include>
+                        </includes>
+                    </configuration>
                 </execution>
                 <execution>
                     <id>java-test-compile</id>
                     <phase>test-compile</phase>
                     <goals> <goal>testCompile</goal> </goals>
+                    <configuration>
+                        <testIncludes>
+                            <testInclude>${project.basedir}/src/test/java</testInclude>
+                        </testIncludes>
+                    </configuration>
                 </execution>
             </executions>
         </plugin>
